@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti 💖</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  background: linear-gradient(-45deg, #ff4e8a, #ff9ecf, #ff6fa5, #ffc3e1);
+  background-size: 400% 400%;
+  animation: gradient 12s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+.card {
+  background: rgba(255,255,255,0.95);
+  padding: 40px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  position: relative;
+  max-width: 400px;
+  animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.8);}
+  to {opacity: 1; transform: scale(1);}
+}
+
+h1 {
+  color: #ff2e74;
+}
+
+p {
+  color: #444;
+}
+
+.buttons {
+  margin-top: 30px;
+}
+
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px;
+  transition: 0.3s;
+}
+
+#yesBtn {
+  background: #ff2e74;
+  color: white;
+}
+
+#yesBtn:hover {
+  transform: scale(1.15);
+  background: #ff0055;
+}
+
+#noBtn {
+  background: #ccc;
+  position: absolute;
+}
+
+.hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+.heart {
+  position: absolute;
+  color: rgba(255, 0, 100, 0.7);
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh) scale(1); opacity: 1; }
+  100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+}
+
+.final-message {
+  font-size: 22px;
+  color: #ff2e74;
+  animation: pop 1s ease forwards;
+}
+
+@keyframes pop {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <h1>Hola mi amor 💖</h1>
+  <p>Hay algo muy importante que quiero preguntarte...</p>
+  <h2>¿Quieres ser mi San Valentín? 🌹</h2>
+
+  <div class="buttons">
+    <button id="yesBtn">¡Sí! 😍</button>
+    <button id="noBtn">No 😢</button>
+  </div>
+</div>
+
+<div class="hearts" id="hearts"></div>
+
+<audio id="music" autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const card = document.getElementById("card");
+const heartsContainer = document.getElementById("hearts");
+
+// Botón "No" huye
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+// Cuando dice que sí
+yesBtn.addEventListener("click", () => {
+  card.innerHTML = `
+    <div class="final-message">
+      Sabía que dirías que sí ❤️✨<br><br>
+      Eres lo mejor que me ha pasado 💕<br>
+      Te amo muchísimo 💖
+    </div>
+  `;
+
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+
+  }, 250);
+});
+</script>
+
+</body>
+</html>
